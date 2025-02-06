@@ -8,7 +8,7 @@
 /* Style global du body */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #f5f7fa; /* Fond très clair */
+  background-color: #dae7fb; /* Fond très clair */
   color: #333;
   line-height: 1.5;
 }
@@ -21,18 +21,19 @@ body {
 }
 
 /* Titre principal */
-.container h1 {
-  font-size: 2rem;
+.container h2 {
+  font-size: 4rem;
   font-weight: 600;
   color: #2b2b2b;
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-/* Carte utilisateur pour chaque docteur */
+/* Carte utilisateur pour chaque docteur (disposition en colonne) */
 .user-card {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Empile l'image et les infos verticalement */
+  align-items: center;    /* Centre les éléments horizontalement */
   background-color: #fff;
   border: 1px solid #e1e4e8;
   border-radius: 8px;
@@ -54,18 +55,22 @@ body {
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto 1rem auto; /* Centre l'image et ajoute un espace en dessous */
 }
 
 /* Informations du docteur */
 .user-info {
-  flex: 1;
+  width: 100%;
+  text-align: center;
 }
 
 .user-info p {
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   color: #4a4a4a;
+  line-height: 1.4;
 }
 
 .user-info p strong {
@@ -78,17 +83,138 @@ body {
   background-color: #0069d9;  /* Bleu vif, rappelant une identité professionnelle */
   color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   border-radius: 4px;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
   text-decoration: none;
-  display: inline-block;
-  margin-top: 0.5rem;
+  display: block;
+  margin: 1rem auto 0 auto; /* Centre le bouton et ajoute un espace au-dessus */
 }
 
 .detail-button:hover {
   background-color: #0053ba;
 }
 
+/* Style pour la page de détails du docteur */
+.doctor-info {
+  background-color: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 3rem 1rem;
+  margin: 2rem auto;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-info p {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #4a4a4a;
+  text-align: center;
+}
+
+.doctor-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem auto;
+}
+
+/* Media Queries Responsive */
+
+/* Pour Smartphone (écrans jusqu'à 600px) */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-card {
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .user-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .user-info p {
+    font-size: 0.8rem;
+  }
+  
+  .detail-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    margin: 0.75rem auto 0 auto;
+  }
+  
+  .doctor-info {
+    padding: 2rem 1rem;
+    margin: 1rem auto;
+  }
+  
+  .doctor-image {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Pour Tablette (écrans entre 601px et 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .container h2 {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .user-card {
+    padding: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+  
+  .user-image {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.85rem;
+  }
+  
+  .user-info p {
+    font-size: 0.85rem;
+  }
+  
+  .detail-button {
+    padding: 0.85rem 1.75rem;
+    font-size: 0.85rem;
+    margin: 0.85rem auto 0 auto;
+  }
+  
+  .doctor-info {
+    padding: 2.5rem 1rem;
+    margin: 1.5rem auto;
+  }
+  
+  .doctor-image {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.85rem;
+  }
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../App.css"; // Assurez-vous que le chemin vers App.css est correct
+import "../App.css";
 
 function DoctorList() {
   const [doctors, setDoctors] = useState([]);
@@ -12,34 +12,30 @@ function DoctorList() {
   }, []);
 
   const fetchDoctors = async () => {
-
     try {
-      const response = await fetch("https://127.0.0.1:8000/api/doctors");
+      const response = await fetch("https://127.0.0.1:8000/api/doctors"); // adresse de l'API pour recuperer les donnees du medecin
       if (!response.ok) {
         throw new Error(`Erreur HTTP : ${response.status}`);
       }
 
       const data = await response.json();
       setDoctors(data.member || data); // Utilisation de la clef "member" si elle existe dans la structure de données
-
     } catch (error) {
       console.error("Erreur lors du chargement des données :", error);
       setErrorMessage("Erreur lors du chargement des données.");
     }
-
   };
-
   const handleCardClick = (id) => {
-    navigate(`/doctors/${id}`);
+    navigate(`/doctors/${id}`); // Redirige vers la page de détails du docteur
   };
 
   return (
     <div className="container">
-      <h1>Liste des Docteurs</h1>
+      <h2>Liste des Docteurs</h2>
       {errorMessage && <p>{errorMessage}</p>}
       {doctors.length === 0 && !errorMessage ? (
         <p>Aucun docteur à afficher.</p>
-      ) : (
+      ) : ( 
         doctors.map((doctor) => (
           <div
             key={doctor.id}
@@ -71,7 +67,7 @@ function DoctorList() {
               <button
                 className="detail-button"
                 onClick={(e) => {
-                  e.stopPropagation(); 
+                  e.stopPropagation();
                   handleCardClick(doctor.id);
                 }}
               >
@@ -86,5 +82,3 @@ function DoctorList() {
 }
 
 export default DoctorList;
-
-

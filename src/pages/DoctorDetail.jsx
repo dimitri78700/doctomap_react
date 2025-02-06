@@ -5,7 +5,6 @@ import "../App.css";
 function DoctorDetail() {
   const { id } = useParams();
   const [doctor, setDoctor] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -20,21 +19,11 @@ function DoctorDetail() {
       }
       const data = await response.json();
       setDoctor(data);
-      setLoading(false);
     } catch (error) {
       console.error("Erreur lors du chargement des détails du médecin :", error);
       setErrorMessage("Erreur lors du chargement des détails du médecin.");
-      setLoading(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="container">
-        <p>Chargement...</p>
-      </div>
-    );
-  }
 
   if (errorMessage) {
     return (
@@ -79,7 +68,7 @@ function DoctorDetail() {
           </p>
         </div>
       </div>
-      <Link to="/doctors" className="back-button">
+      <Link to="/" className="back-button">
         Retour à la liste
       </Link>
     </div>
