@@ -15,11 +15,11 @@ function DoctorList() {
     try {
       const response = await fetch("https://127.0.0.1:8000/api/doctors"); // adresse de l'API pour recuperer les donnees du medecin
       if (!response.ok) {
-        throw new Error(`Erreur HTTP : ${response.status}`);
+        throw new Error(`Erreur HTTP : ${response.status}`); // Gestion de l'erreur HTTP
       }
 
       const data = await response.json();
-      setDoctors(data.member || data); // Utilisation de la clef "member" si elle existe dans la structure de données
+      setDoctors(data.member || data); // Utilisation de la clef "member" si elle existe dans la structure de données de l'API
     } catch (error) {
       console.error("Erreur lors du chargement des données :", error);
       setErrorMessage("Erreur lors du chargement des données.");
