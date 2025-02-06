@@ -1,46 +1,90 @@
-import { useEffect, useState } from 'react';
-import '../../src/App.css';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../App.css"; // Assurez-vous que le chemin vers App.css est correct
 
 function DoctorList() {
-   
+  const [doctors, setDoctors] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-    const [doctors, setDoctors] = useState([]);
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
 
-    useEffect(() => {
-        fetchDoctors();
-    }, []);
+  const fetchDoctors = async () => {
 
-    const fetchDoctors = async () => {
-        try {
-            const response = await fetch("https://127.0.0.1:8000/api/doctors");
-            const data = await response.json();
-            setDoctors(data.member);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    
-    
+    try {
+      const response = await fetch("https://127.0.0.1:8000/api/doctors");
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP : ${response.status}`);
+      }
 
-    return(
-        <div className="container">
-        <h1>Liste des Docteurs</h1>
-        {doctors.map(doctor => (
-        <div key={doctor.id} className="user-card">
-            <img src={doctor.image} alt="Image du docteur" className="user-image" />
+      const data = await response.json();
+      setDoctors(data.member || data); // Utilisation de la clef "member" si elle existe dans la structure de données
+
+    } catch (error) {
+      console.error("Erreur lors du chargement des données :", error);
+      setErrorMessage("Erreur lors du chargement des données.");
+    }
+
+  };
+
+  const handleCardClick = (id) => {
+    navigate(`/doctors/${id}`);
+  };
+
+  return (
+    <div className="container">
+      <h1>Liste des Docteurs</h1>
+      {errorMessage && <p>{errorMessage}</p>}
+      {doctors.length === 0 && !errorMessage ? (
+        <p>Aucun docteur à afficher.</p>
+      ) : (
+        doctors.map((doctor) => (
+          <div
+            key={doctor.id}
+            className="user-card"
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              src={doctor.image}
+              alt="Image du docteur"
+              className="user-image"
+            />
             <div className="user-info">
-                <p><strong>Prénom:</strong> {doctor.firstname}</p>
-                <p><strong>Nom de famille:</strong> {doctor.lastname}</p>
-                <p><strong>Spécialité:</strong> {doctor.speciality}</p>
-                <p><strong>Ville:</strong> {doctor.city}</p>
-                <p><strong>Téléphone:</strong> {doctor.phone}</p>
+              <p>
+                <strong>Prénom :</strong> {doctor.firstname}
+              </p>
+              <p>
+                <strong>Nom de famille :</strong> {doctor.lastname}
+              </p>
+              <p>
+                <strong>Spécialité :</strong> {doctor.speciality}
+              </p>
+              <p>
+                <strong>Ville :</strong> {doctor.city}
+              </p>
+              <p>
+                <strong>Téléphone :</strong> {doctor.phone}
+              </p>
+              {/* Bouton pour accéder aux détails */}
+              <button
+                className="detail-button"
+                onClick={(e) => {
+                  e.stopPropagation(); 
+                  handleCardClick(doctor.id);
+                }}
+              >
+                Voir détails
+              </button>
             </div>
-        </div>
-        ))}
+          </div>
+        ))
+      )}
     </div>
-    )
+  );
 }
 
 export default DoctorList;
-                    
+
 

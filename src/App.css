@@ -5,45 +5,47 @@
   box-sizing: border-box;
 }
 
-/* Style global du body avec un fond bleu très léger */
+/* Style global du body */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #e6f0fa; /* Bleu très pâle */
+  background-color: #f5f7fa; /* Fond très clair */
   color: #333;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Conteneur principal centré */
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 2rem;
 }
 
 /* Titre principal */
 .container h1 {
-  text-align: center;
-  margin-bottom: 40px;
   font-size: 2rem;
-  font-weight: 500;
-  color: #003366; /* Bleu foncé pour le titre */
+  font-weight: 600;
+  color: #2b2b2b;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-/* Carte utilisateur minimaliste */
+/* Carte utilisateur pour chaque docteur */
 .user-card {
   display: flex;
   align-items: center;
   background-color: #fff;
+  border: 1px solid #e1e4e8;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .user-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Image du docteur */
@@ -52,21 +54,41 @@ body {
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 20px;
+  margin-right: 1rem;
 }
 
-/* Informations sur le docteur */
+/* Informations du docteur */
 .user-info {
   flex: 1;
 }
 
 .user-info p {
-  margin-bottom: 5px;
   font-size: 0.9rem;
-  color: #555;
+  margin-bottom: 0.5rem;
+  color: #4a4a4a;
 }
 
 .user-info p strong {
-  color: #003366;
   font-weight: 600;
+  color: #2b2b2b;
 }
+
+/* Bouton pour afficher les détails */
+.detail-button {
+  background-color: #0069d9;  /* Bleu vif, rappelant une identité professionnelle */
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.detail-button:hover {
+  background-color: #0053ba;
+}
+
