@@ -31,7 +31,7 @@ function DoctorList() {
 
   return (
     <div className="container">
-      <h2>Liste des Docteurs</h2>
+      <h2>Liste des Docteurs de DoctoMap</h2>
       {errorMessage && <p>{errorMessage}</p>}
       {doctors.length === 0 && !errorMessage ? (
         <p>Aucun docteur à afficher.</p>
